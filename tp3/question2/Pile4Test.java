@@ -24,37 +24,77 @@ package question2;
  *          engagements, et suivi d'un appel à tearDown(), qui les détruit.
  */
 public class Pile4Test extends junit.framework.TestCase {
-	// Définissez ici les variables d'instance nécessaires à vos engagements;
-	// Vous pouvez également les saisir automatiquement du présentoir
-	// à l'aide du menu contextuel "Présentoir --> Engagements".
-	// Notez cependant que ce dernier ne peut saisir les objets primitifs
-	// du présentoir (les objets sans constructeur, comme int, float, etc.).
+    // Définissez ici les variables d'instance nécessaires à vos engagements;
+    // Vous pouvez également les saisir automatiquement du présentoir
+    // à l'aide du menu contextuel "Présentoir --> Engagements".
+    // Notez cependant que ce dernier ne peut saisir les objets primitifs
+    // du présentoir (les objets sans constructeur, comme int, float, etc.).
+    private PileI pile1;
+    private PileI pile2;
+    /**
+     * Constructeur de la classe-test Pile4Test
+     */
+    public Pile4Test() {
+    }
 
-	/**
-	 * Constructeur de la classe-test Pile4Test
-	 */
-	public Pile4Test() {
-	}
+    /**
+     * Met en place les engagements.
+     * 
+     * Méthode appelée avant chaque appel de méthode de test.
+     */
+    protected void setUp() // throws java.lang.Exception
+    {
+        pile1 = new question2.Pile2();
+        pile2 = new question2.Pile2();
+        // Initialisez ici vos engagements
 
-	/**
-	 * Met en place les engagements.
-	 * 
-	 * Méthode appelée avant chaque appel de méthode de test.
-	 */
-	protected void setUp() // throws java.lang.Exception
-	{
-		// Initialisez ici vos engagements
+    }
 
-	}
+    /**
+     * Supprime les engagements
+     * 
+     * Méthode appelée après chaque appel de méthode de test.
+     */
+    protected void tearDown() // throws java.lang.Exception
+    {
+        pile1=null;
+        pile2=null;
+        // Libérez ici les ressources engagées par setUp()
+    }
+    
+    public void testPilePleine() throws Exception {
+        PileI p = new question2.Pile2(3);
+        p.empiler(10);
+        p.empiler(20);
+        p.empiler(30);
+        assertEquals(3, p.taille());
+        assertEquals(true, p.estPleine());
+        assertEquals(p.taille(), p.capacite());
+        
+    }
+    
+    public void testPileVide() throws Exception {
+        PileI p = new question2.Pile2(3);
+        assertEquals(true, p.estVide());
+        
+    }
+    
+     public void testPileEquals() throws Exception {
 
-	/**
-	 * Supprime les engagements
-	 * 
-	 * Méthode appelée après chaque appel de méthode de test.
-	 */
-	protected void tearDown() // throws java.lang.Exception
-	{
-		// Libérez ici les ressources engagées par setUp()
-	}
+        pile1.empiler(10);
+        pile1.empiler(20);
+        pile1.empiler(30);
+
+        pile2.empiler(10);
+        pile2.empiler(20);
+        pile2.empiler(30);
+
+        assertTrue("egaux", pile1.equals(pile2));
+        assertTrue("egaux", pile2.equals(pile1));
+
+        pile2.empiler(40);
+        assertFalse("egaux", pile1.equals(pile2));
+
+    }
 
 }
